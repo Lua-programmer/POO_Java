@@ -7,36 +7,12 @@ public class ServicoAluguel {
     private Double precoDia;
     private Double precoHora;
 
-    private TaxaServico taxaServico;
+    private TaxaServicoInterface taxaServicoInterface;
 
-    public ServicoAluguel(Double precoDia, Double precoHora, TaxaServico taxaServico) {
+    public ServicoAluguel(Double precoDia, Double precoHora, TaxaServicoInterface taxaServicoInterface) {
         this.precoDia = precoDia;
         this.precoHora = precoHora;
-        this.taxaServico = taxaServico;
-    }
-
-    public Double getPrecoDia() {
-        return precoDia;
-    }
-
-    public void setPrecoDia(Double precoDia) {
-        this.precoDia = precoDia;
-    }
-
-    public Double getPrecoHora() {
-        return precoHora;
-    }
-
-    public void setPrecoHora(Double precoHora) {
-        this.precoHora = precoHora;
-    }
-
-    public TaxaServico getTaxaServico() {
-        return taxaServico;
-    }
-
-    public void setTaxaServico(TaxaServico taxaServico) {
-        this.taxaServico = taxaServico;
+        this.taxaServicoInterface = taxaServicoInterface;
     }
 
     //metodo responsavel por gerar a nota de pagamento
@@ -54,7 +30,7 @@ public class ServicoAluguel {
             pagamentoBasico = Math.ceil(horas / 24) * precoDia; //Math.ceil vai arredondar o dia pra cima
         }
 
-        double taxa = taxaServico.taxa(pagamentoBasico);
+        double taxa = taxaServicoInterface.taxa(pagamentoBasico);
 
         aluguelDoCarro.setFatura(new Fatura(pagamentoBasico, taxa));
     }
